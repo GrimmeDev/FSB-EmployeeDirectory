@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import Axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    result: {}
+  };
+
+  componentDidMount() {
+    this.getRandos();
+  }
+
+  getRandos = () => {
+    Axios.get(
+      `https://randomuser.me/api/?results=12`,
+    ).then(randomEmps => {
+      console.log('randomEmps==>>', randomEmps);
+      this.setState({ result: randomEmps.data.results });
+      console.log('state==>>', this.state.result);
+    })
+  }
+  render() {
+    // const {result} = this.state;
+    return (
+      <>
+        <div>HEADER</div>
+      </>
+    );
+  }
 }
 
 export default App;
